@@ -1,0 +1,17 @@
+frontend/.git
+frontend/.gitignore
+frontend/node_modules
+frontend/dist
+frontend/build
+frontend/.env
+frontend/.DS_Store
+frontend/.idea
+frontend/.vscode
+frontend/coverage
+todo-service/.git
+todo-service/.gitignore
+todo-service/.env
+todo-service/.DS_Store
+todo-service/.idea
+todo-service/.vscode
+todo-service/coverage

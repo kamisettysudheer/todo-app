@@ -1,0 +1,20 @@
+services:
+  todo-service:
+    image: vanamalajayanth/todobe
+    ports:
+      - "8080:8080"
+    networks:
+      - todo-net
+
+  frontend:
+    image: vanamalajayanth/todofe
+    ports:
+      - "3000:3000"
+    depends_on:
+      - todo-service
+    networks:
+      - todo-net
+
+networks:
+  todo-net:
+    driver: bridge
