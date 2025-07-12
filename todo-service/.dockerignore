@@ -1,0 +1,7 @@
+# Go backend .dockerignore
+.git
+.gitignore
+.env
+.DS_Store
+.idea
+.vscode
