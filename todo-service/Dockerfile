@@ -6,8 +6,8 @@ RUN go mod init todo-service
 RUN go mod tidy
 RUN go mod download
 
-COPY . .
+COPY . ./app
 
 EXPOSE 8080
 
-CMD ["go", "run", "."]
+CMD ["go", "run", "./app"]
