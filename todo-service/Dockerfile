@@ -2,12 +2,18 @@ FROM golang:1.24
 
 WORKDIR /app
 
-RUN go mod init todo-service
-RUN go mod tidy
+# Copy go.mod and go.sum first for better caching
+COPY go.mod go.sum ./
+
+# Download dependencies
 RUN go mod download
 
-COPY . ./app
+# Copy the source code
+COPY . .
+
+# Build the application
+RUN go build -o main .
 
 EXPOSE 8080
 
-CMD ["go", "run", "./app"]
+CMD ["./main"]

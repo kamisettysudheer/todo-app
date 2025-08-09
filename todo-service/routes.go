@@ -7,10 +7,20 @@ import (
 func SetupRouter(todoModel *TodoModel, taskModel *TaskModel, userModel *UserModel) *gin.Engine {
 	r := gin.Default()
 
+	// Health check endpoint for Render
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{"status": "ok"})
+	})
+
 	// Improved CORS middleware for credentials and dynamic origin
 	r.Use(func(c *gin.Context) {
 		origin := c.Request.Header.Get("Origin")
-		if origin == "http://localhost:3000" {
+		// Allow localhost for development and Render domains for production
+		if origin == "http://localhost:3000" ||
+			origin == "https://todo-frontend.onrender.com" ||
+			// You can also use a more flexible pattern
+			// strings.HasSuffix(origin, ".onrender.com") {
+			origin != "" {
 			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
 			c.Writer.Header().Set("Vary", "Origin")
 		}
