@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,11 +16,9 @@ func SetupRouter(todoModel *TodoModel, taskModel *TaskModel, userModel *UserMode
 	// Improved CORS middleware for credentials and dynamic origin
 	r.Use(func(c *gin.Context) {
 		origin := c.Request.Header.Get("Origin")
-		// Allow localhost for development and Render domains for production
+		// Allow localhost for development and any Render domain for production
 		if origin == "http://localhost:3000" ||
-			origin == "https://todo-frontend.onrender.com" ||
-			// You can also use a more flexible pattern
-			// strings.HasSuffix(origin, ".onrender.com") {
+			strings.HasSuffix(origin, ".onrender.com") ||
 			origin != "" {
 			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
 			c.Writer.Header().Set("Vary", "Origin")
